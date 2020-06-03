@@ -1,0 +1,17 @@
+{
+  "$id": "https://localhost/api/references/schemas/delivered-request-json-schema.json",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "title": "JSON Schema for message delivered Request format",
+  "type": "object",
+  "required": [ "payload", "signature" ],
+  "properties": {
+    "payload": {
+      "type": "string",
+      "description": "Payload of transaction sms Base64 Encode"
+    },
+    "signature": {
+      "type": "string",
+      "description": "Signature for Payload Base64 Enocde"
+    }
+  }
+}

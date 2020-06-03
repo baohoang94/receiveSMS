@@ -1,0 +1,52 @@
+﻿{
+  "$schema": "https://localhost/api/references/schemas/delivered-response-json-schema.json",
+  "title": "JSON Schema for delivered response format",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "number",
+      "description": "Trạng thái của response"
+    },
+    "message": {
+      "type": "string",
+      "description": "Mô tả cho status"
+    },
+    "data": {
+      "transactionID": {
+        "type": "string",
+        "description": "transactionId nhận được từ SAMI-S (Có trong bản tin được giải mã)"
+      },
+      "deliveredReports": {
+        "description": "An array of response data.",
+        "items": { "$ref": "#/definitions/deliveredReport" },
+        "type": "array"
+      }
+    },
+    "responseTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Thời gian trả response"
+    }
+  },
+  "definitions": {
+    "deliveredReport": {
+      "type": "object",
+      "required": [ "statusCode", "statusMessage", "smsInGuid", "responseId"],
+      "properties": {
+        "smsInGuid": {
+          "type": "string",
+          "description": "Mã định danh tin nhắn gửi từ phía SAMI-S"
+        },
+        "statusMessage": {
+          "type": "string",
+          "enum": [ "RECEIVED", "DUPLICATE" ],
+          "description": "Mô tả trạng thái nhận từ phía đối tác"
+        },
+        "responseId": {
+          "type": "string",
+          "description": "Id ghi nhận từ phía đối tác"
+        }
+      }
+    }
+  }
+}

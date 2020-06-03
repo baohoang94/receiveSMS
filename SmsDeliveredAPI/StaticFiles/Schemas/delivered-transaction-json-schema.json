@@ -1,0 +1,61 @@
+﻿{
+  "$id": "https://localhost/api/references/schemas/delivered-transaction-json-schema.json",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "title": "JSON Schema for SmsTransaction format",
+  "type": "object",
+  "required": [ "transactionId", "cooperateId", "messagesDelivered", "createTime" ],
+  "properties": {
+    "transactionId": {
+      "description": "TransactionId send mo",
+      "type": "string"
+    },
+    "cooperateId": {
+      "description": "CooperateId",
+      "type": "integer"
+    },
+    "messagesDelivered": {
+      "description": "An array of delivered.",
+      "items": { "$ref": "#/definitions/messageDelivered" },
+      "minItems": 1,
+      "type": "array"
+    },
+    "createTime": {
+      "description": "Event sending time",
+      "format": "date-time",
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "messageDelivered": {
+      "type": "object",
+      "required": [ "smsInGuid", "subscriber", "message", "shortCode", "receivedTime", "operatorId" ],
+      "properties": {
+        "smsInGuid": {
+          "type": "string",
+          "description": "Mã định danh tin nhắn gửi từ phía SAMI-S"
+        },
+        "subscriber": {
+          "type": "string",
+          "description": "Số điện thoại gửi"
+        },
+        "message": {
+          "type": "string",
+          "description": "Thông điệp khách hàng gửi tin nhắn"
+        },
+        "shortCode": {
+          "type": "string",
+          "description": "Đầu số khách hàng gửi tin"
+        },
+        "receivedTime": {
+          "type": "string",
+          "description": "Thời gian nhận message delivered"
+        },
+        "operatorId": {
+          "type": "number",
+          "enum": [ 0, 1, 2, 3, 4, 5, 6 ],
+          "description": "Subscriber thuộc nhà mạng nào 0: mobifone, 1: vinaphone, 2: viettel, 3: vietnamobile, 4: gtel"
+        }
+      }
+    }
+  }
+}
